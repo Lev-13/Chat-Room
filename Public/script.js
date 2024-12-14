@@ -4,26 +4,19 @@ const roomContainer = document.getElementById('room-container')
 const messageForm = document.getElementById('send-container')
 const messageInput = document.getElementById('message-input')
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (messageForm != null) {
-      const nameInput = document.getElementById('name-input');
-      const name = nameInput ? nameInput.value.trim() : 'Anonymous';
-      
-      socket.emit('new-user', roomName, name);
-      appendMessage('You joined');
-  
-      messageForm.addEventListener('submit', e => {
-        e.preventDefault();
-        const message = messageInput.value.trim();
-        if (message) {
-          appendMessage(`You: ${message}`);
-          socket.emit('send-chat-message', roomName, message);
-          messageInput.value = '';
-        }
-      });
-    }
-  });
-  
+if (messageForm != null) {
+  const name = prompt('What is your name?')
+  appendMessage('You joined')
+  socket.emit('new-user', roomName, name)
+
+  messageForm.addEventListener('submit', e => {
+    e.preventDefault()
+    const message = messageInput.value
+    appendMessage(`You: ${message}`)
+    socket.emit('send-chat-message', roomName, message)
+    messageInput.value = ''
+  })
+}
 
 socket.on('room-created', room => {
   const roomElement = document.createElement('div')
