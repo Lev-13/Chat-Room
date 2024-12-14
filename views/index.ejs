@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat App</title>
+
+  <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script defer src="script.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #e7f2f4, #00c8ff);
+    }
+
+    form {
+      background-color: white;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    form input {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #9d3e3e;
+      border-radius: 5px;
+      outline: none;
+      font-size: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    form input:focus {
+      border-color: #c31a0e;
+      box-shadow: 0 0 5px rgba(205, 42, 6, 0.5);
+    }
+
+    form button {
+      background-color: #1cd1f69d;
+      color: black;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      width: 100%;
+    }
+
+    form button:hover {
+      background-color: #000000;
+      color: white;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 15px;
+      }
+
+      form {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.2rem;
+      }
+
+      form input,
+      form button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+    <form action="/room" method="POST">
+        <h1>Create or Join a Room</h1>
+        <input name="room" type="text" placeholder="Enter room name" required>
+        <input id="name-input" name="name" type="text" placeholder="Enter your name" required>
+        <button type="submit">Create/Join Room</button>
+     </form>
+</body>
+</html>

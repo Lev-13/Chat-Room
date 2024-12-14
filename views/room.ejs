@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat App</title>
+  <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script defer src="script.js"></script>
+  <script>
+    const roomName = "<%= roomName %>";
+  </script>
+  <style>
+    :root {
+      --bg-color-light: #f9f9f9;
+      --text-color-light: #333;
+      --bg-color-dark: #121212;
+      --text-color-dark: #f1f1f1;
+      --accent-color: #6200ea;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: var(--bg-color-light);
+      color: var(--text-color-light);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark {
+      background-color: var(--bg-color-dark);
+      color: var(--text-color-dark);
+    }
+
+    #message-container {
+      width: 80%;
+      max-width: 1200px;
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: var(--bg-color-light);
+      transition: background-color 0.3s;
+    }
+
+    #message-container div {
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      background-color: #e0e0e0;
+      transition: background-color 0.3s;
+    }
+
+    #message-container div:nth-child(2n) {
+      background-color: #d0d0d0;
+    }
+
+    body.dark #message-container {
+      background-color: #1e1e1e;
+    }
+
+    body.dark #message-container div {
+      background-color: #2c2c2c;
+    }
+
+    body.dark #message-container div:nth-child(2n) {
+      background-color: #3c3c3c;
+    }
+
+    #send-container {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      padding: 10px;
+      background-color: var(--bg-color-light);
+      border-top: 1px solid #ddd;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+    }
+
+    body.dark #send-container {
+      background-color: #1e1e1e;
+      border-top: 1px solid #333;
+    }
+
+    #message-input {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    #message-input:focus {
+      border-color: var(--accent-color);
+    }
+
+    #send-button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--accent-color);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #send-button:hover {
+      background-color: #3700b3;
+    }
+
+    #theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 5px 15px;
+      border: none;
+      border-radius: 20px;
+      background-color: var(--accent-color);
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #theme-toggle:hover {
+      background-color: #3700b3;
+    }
+  </style>
+</head>
+<body>
+  <button id="theme-toggle">Switch to Dark Mode</button>
+  <div id="message-container"></div>
+  <form id="send-container">
+    <input type="text" id="message-input" placeholder="Type your message here...">
+    <button type="submit" id="send-button">Send</button>
+  </form>
+
+  <script>
+    const themeToggleButton = document.getElementById('theme-toggle');
+
+    themeToggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDarkMode = document.body.classList.contains('dark');
+      themeToggleButton.textContent = isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+    });
+  </script>
+</body>
+</html>
